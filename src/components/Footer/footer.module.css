@@ -21,12 +21,12 @@ ul {
   line-height: 1.5;
 }
 
-a {
+.socialsListItemLink {
   text-decoration: none;
   color: #E9DFAC;
 }
 
-a:hover {
+.socialsListItemLink:hover {
   text-decoration: none;
   color: #2F2D22;
 }
