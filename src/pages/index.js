@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link } from "gatsby"
 import styles from "./index.module.css"
 
 import Layout from "../components/Layout"
@@ -8,9 +9,14 @@ import DemandList from "../components/DemandList"
 const IndexPage = () => (
   <Layout>
     <Seo title="More Info Coming Soon" />
-    <h1>More Information Coming Soon!</h1>
-    <p>People have had enough. The MayDay strike is a strike being held on the 1st of May lasting 2 weeks attempting to achieve global efforts by encouraging thousands, millions of people, celebrities and unions to stand up. On May 1st 2022 workers will either quit their jobs, go on strike or do what they can. Join the subreddit or Discord to discuss the day.</p>
+    <h1>Who We Are</h1>
+    <p>May Day Strike is a grassroots movement focused on establishing economic security, dignity, and fairness for workers of every nationality, race, and political affiliation.</p>
+    <p>May 1 will mark the beginning of a general strike, a debt strike, and a series of protests & demonstrations that will last until workers’ demands are met.</p>
+    <p>What are we asking for, exactly?</p>
     <DemandList />
+    <p>Join us on Discord and social media to become part of the new era of labor organization in the United States and across the globe.</p>
+    <p><Link to="/faq">Frequently Asked Questions</Link></p>
+    <p>More updates and information to come!</p>
   </Layout>
 )
 
