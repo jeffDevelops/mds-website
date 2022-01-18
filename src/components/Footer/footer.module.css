@@ -46,17 +46,26 @@ a:hover {
 
 .ftMainItem {
   padding: 1.25rem;
-  margin-bottom: -1.875rem;
-  min-width: 12.5rem /*200px*/;
+  min-width: 12.5rem;
+}
+
+.ftColumnContent {
+  padding-top: 0rem;
 }
 
 @media only screen and (min-width: 29.8125rem /*477px*/) {
   .ftMain {
       justify-content: space-around;
   }
+  .ftColumnContent {
+    padding-top: 3.5rem;
+  }
 }
 @media only screen and (min-width: 77.5rem /*1240px*/ ) {
   .ftMain {
       justify-content: space-evenly;
+  }
+  .ftColumnContent {
+    padding-top: 3.5rem;
   }
 }
