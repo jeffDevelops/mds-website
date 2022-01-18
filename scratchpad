@@ -1,0 +1,41 @@
+import * as React from "react"
+import { Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
+
+import * as FooterStyles from "./footer.module.css"
+
+const Footer = ({ siteTitle }) => (
+  <header
+    style={{
+      background: `#C73A26`,
+      marginBottom: `1.45rem`,
+    }}
+  >
+    <div
+      style={{
+        margin: `0 auto`,
+        maxWidth: 960,
+        padding: `1.45rem 1.0875rem`,
+      }}
+    >
+      <Link
+        to="/"
+        style={{
+          color: `#e9dfac`,
+          textDecoration: `none`,
+        }}
+      >
+        <StaticImage
+          src="../images/mayday-logo-circle.png"
+          width={300}
+          quality={95}
+          formats={["auto", "webp", "avif"]}
+          alt="A Gatsby astronaut"
+          style={{ marginBottom: `1.45rem` }}
+        />
+      </Link>
+    </div>
+  </header>
+)
+
+export default Footer

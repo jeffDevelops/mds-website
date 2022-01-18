@@ -1,0 +1,25 @@
+header {
+  background: #C73A26;
+  margin-bottom: 1.45rem;
+}
+
+.headerText {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+}
+
+.headerH1 {
+  margin-bottom: 0;
+}
+
+.siteTitleLink {
+  margin: 0;
+  font-family: Alpenkreuzer;
+}
+
+a {
+  color: #e9dfac;
+  text-decoration: none;
+}
+
