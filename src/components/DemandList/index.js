@@ -1,5 +1,7 @@
 import * as React from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
+
+import * as DemandListStyles from "./demandList.module.css"
 
 const DemandList = data => (
   <div>
@@ -10,9 +12,11 @@ const DemandList = data => (
     </p>
     <ol>
       {data.allDemandListYaml.edges[0].node.listOfDemands.map(item => (
-        <li>
-          {item.demand}
-        </li>
+        <h3>
+          <li>
+            {item.demand}
+          </li>
+        </h3>
       ))}
     </ol>
   </div>

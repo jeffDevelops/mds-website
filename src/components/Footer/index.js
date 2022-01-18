@@ -1,12 +1,11 @@
 import * as React from "react"
-import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faDiscord, faFacebook, faInstagram, faRedditAlien, faSnapchatGhost, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
+import { faDiscord, faInstagram, faRedditAlien, faSnapchatGhost, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 
 import * as FooterStyles from "./footer.module.css"
 
-const Footer = ({ siteTitle }) => (
+const Footer = () => (
   <div className={FooterStyles.footer}>
     <section className={FooterStyles.ftMain}>
     <div className={FooterStyles.ftMainItem}>
