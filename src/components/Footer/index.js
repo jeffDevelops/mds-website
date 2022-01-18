@@ -23,7 +23,6 @@ const Footer = ({ siteTitle }) => (
         <h2 className={FooterStyles.ftTitle}>Connect With Us</h2>
         <ul>
           <li className={FooterStyles.socialsListItem}><a href="https://discord.gg/7ScvDppASV"><FontAwesomeIcon icon={faDiscord} /> Discord</a></li>
-          <li className={FooterStyles.socialsListItem}><a href="#"><FontAwesomeIcon icon={faFacebook} /> Facebook</a></li>
           <li className={FooterStyles.socialsListItem}><a href="https://www.reddit.com/r/MayDayStrike/"><FontAwesomeIcon icon={faRedditAlien} /> Reddit</a></li>
           <li className={FooterStyles.socialsListItem}><a href="https://twitter.com/MayDayStrike22"><FontAwesomeIcon icon={faTwitter} /> Twitter</a></li>
         </ul>
