@@ -11,7 +11,7 @@ const Footer = ({ siteTitle }) => (
     <section className={FooterStyles.ftMain}>
     <div className={FooterStyles.ftMainItem}>
       <StaticImage
-        src="../images/mayday-logo-circle.png"
+        src="../../images/mayday-logo-circle.png"
         width={300}
         quality={95}
         formats={["auto", "webp", "avif"]}
