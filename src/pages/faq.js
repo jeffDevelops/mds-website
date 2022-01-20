@@ -3,11 +3,11 @@ import Layout from "../components/Layout"
 import Seo from "../components/seo"
 import FAQList from "../components/FAQList"
 
-const FAQPage2 = () => (
+const FAQPage = () => (
   <Layout>
     <Seo title="Frequently Asked Questions" />
     <FAQList />
   </Layout>
 )
 
-export default FAQPage2
+export default FAQPage

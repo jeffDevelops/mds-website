@@ -18,7 +18,6 @@ const Footer = () => (
           alt="May Day Strike Icon"
         />
       </div>
-      
       <div className={FooterStyles.ftMainItem}>
         <div className={FooterStyles.ftColumnContent}>
           <h2 className={FooterStyles.ftTitle}>Follow Us</h2>
