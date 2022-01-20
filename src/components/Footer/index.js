@@ -42,7 +42,7 @@ const Footer = () => (
         <div className={FooterStyles.ftColumnContent}>
           <h2 className={FooterStyles.ftTitle}>Join Us</h2>
           <ul>
-            <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://docs.google.com/forms/d/e/1FAIpQLSeNzjMZdnnp8VC4_kPsSOGbXOcZ3LkOTWNm_RaWZKRwIN5E_g/viewform" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faHandsHelping} /> Volunteer</a></li>
+            <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://forms.gle/FPSGP8SMb9Ati4iT6" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faHandsHelping} /> Volunteer</a></li>
           </ul>
         </div>
       </div>
