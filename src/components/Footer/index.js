@@ -32,7 +32,7 @@ const Footer = () => (
         <div className={FooterStyles.ftColumnContent}>
           <h2 className={FooterStyles.ftTitle}>Connect With Us</h2>
           <ul>
-            <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://discord.gg/7ScvDppASV" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faDiscord} /> Discord</a></li>
+            <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://discord.gg/maydaystrike" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faDiscord} /> Discord</a></li>
             <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://www.reddit.com/r/MayDayStrike/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faRedditAlien} /> Reddit</a></li>
             <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://twitter.com/MayDayStrike22" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter} /> Twitter</a></li>
           </ul>
