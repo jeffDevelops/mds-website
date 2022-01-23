@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faDiscord, faInstagram, faRedditAlien, faSnapchatGhost, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
+import { faDiscord, faFacebook, faInstagram, faRedditAlien, faSnapchatGhost, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import { faHandsHelping } from "@fortawesome/free-solid-svg-icons"
 
 import * as FooterStyles from "./footer.module.css"
@@ -33,6 +33,7 @@ const Footer = () => (
           <h2 className={FooterStyles.ftTitle}>Connect With Us</h2>
           <ul>
             <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://discord.gg/maydaystrike" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faDiscord} /> Discord</a></li>
+            <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://www.facebook.com/May-Day-Strike-110985901475308" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faFacebook} /> Facebook</a></li>
             <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://www.reddit.com/r/MayDayStrike/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faRedditAlien} /> Reddit</a></li>
             <li className={FooterStyles.socialsListItem}><a className={FooterStyles.socialsListItemLink} href="https://twitter.com/MayDayStrike22" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter} /> Twitter</a></li>
           </ul>
