@@ -24,19 +24,30 @@
   color: #2F2D22;
 }
 
-@media only screen and (min-width: 29.8125rem /*477px*/) {
-  .ftMain {
-      justify-content: space-around;
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 62rem) { 
+  .menuBarList {
+    flex-direction: row;
   }
-  .ftColumnContent {
-    padding-top: 3.5rem;
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 48rem) {
+  .menuBarList {
+    flex-direction: row;
   }
-}
-@media only screen and (min-width: 77.5rem /*1240px*/ ) {
-  .ftMain {
-      justify-content: space-evenly;
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 37.5remx) {
+  .menuBarList {
+    flex-direction: column;
   }
-  .ftColumnContent {
-    padding-top: 3.5rem;
+} 
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 37.5rem) {
+  .menuBarList {
+    flex-direction: column;
   }
 }
