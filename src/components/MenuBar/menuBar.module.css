@@ -1,3 +1,7 @@
+.buttonBackground {
+  background: #E9DFAC;
+  border-radius: 0.25rem;
+}
 .menuBarList {
   display: flex;
   justify-content: left;
@@ -23,6 +27,11 @@
   text-decoration: none;
   color: #2F2D22;
 }
+
+/* .hamburger {
+  background-color: #2F2D22;
+  border-radius: 90%
+} */
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 62rem) { 
