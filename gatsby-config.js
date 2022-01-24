@@ -90,7 +90,7 @@ module.exports = {
           // Setting this parameter is also optional
           respectDNT: true,
           // Avoids sending pageview hits from custom paths
-          exclude: ["/404/", "/do-not-track/me/too/"],
+          exclude: ["/do-not-track/", "/do-not-track/me/too/"],
         },
       },
     }

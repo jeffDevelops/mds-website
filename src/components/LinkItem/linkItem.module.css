@@ -1,0 +1,19 @@
+p {
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.linkAnchor {
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+  margin-bottom: 0em;
+}
+
+hr {
+  height: 0.15em;
+  background-color: #2F2D22;
+}

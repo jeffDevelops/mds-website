@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 
 import * as FAQListStyles from "./faqList.module.css"
 import FAQItem from "../FAQItem"
@@ -11,7 +11,7 @@ const FAQList = data => {
       <h1>Frequently Asked Questions</h1>
       <h4>This FAQ list is continually evolving and non-exhaustive. Updates will be added as more questions are brought to our attention. Thank you for standing in solidarity with us!</h4>
       <ol>
-        {data.allFaqListYaml.edges[0].node.listOfQuestions.map((question) => (
+        {data.allListFaqsYaml.edges[0].node.listOfQuestions.map((question) => (
           <li>
             <FAQItem
               question={question.question}
@@ -37,7 +37,6 @@ const FAQList = data => {
           </li>
         ))}
       </ol>
-      <Link to="/">Back to Homepage</Link>
     </div>
   )
 }
@@ -46,7 +45,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query faqListQuery {
-        allFaqListYaml {
+        allListFaqsYaml {
           edges {
             node {
               listOfQuestions {

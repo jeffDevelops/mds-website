@@ -1,0 +1,68 @@
+.buttonBackground {
+  background: #E9DFAC;
+  border-radius: 0.25rem;
+}
+
+.hamburger {
+  background: #2F2D22;
+  border-radius: 50%;
+  width: 48px;
+  margin-top: 0.5rem;
+}
+
+.menuBarList {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 0rem;
+}
+
+.menuBarList li {
+  margin: 0.5rem;
+  margin-left: 0rem;
+  font-size: 1.5rem;
+  list-style-type: none;
+}
+
+.menuBarItemLink {
+  color: #E9DFAC;
+  font-family: LietzLindauHamburg;
+  text-decoration: none;
+  margin-right: 0.75rem;
+}
+
+.menuBarItemLink:hover {
+  text-decoration: none;
+  color: #2F2D22;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 62rem) { 
+  .menuBarList {
+    flex-direction: row;
+    padding-top: 1.25rem;
+  }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 48rem) {
+  .menuBarList {
+    flex-direction: row;
+    padding-top: 1.25rem;
+  }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 37.55rem) {
+  .menuBarList {
+    flex-direction: row;
+    padding-top: 1.25rem;
+  }
+} 
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 37.55rem) {
+  .menuBarList {
+    flex-direction: column;
+    padding-top: 0rem;
+  }
+}

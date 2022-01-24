@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
 import * as HeaderStyles from "./header.module.css"
+import MenuBar from "../MenuBar"
 
 const Header = ({ siteTitle }) => (
   <header>
@@ -12,6 +13,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <MenuBar />
     </div>
   </header>
 )

@@ -7,7 +7,7 @@ const DemandList = data => (
   <div>
     <h1>Our Demands</h1>
     <ol>
-      {data.allDemandListYaml.edges[0].node.listOfDemands.map(item => (
+      {data.allListDemandsYaml.edges[0].node.listOfDemands.map(item => (
         <h3>
           <li>
             {item.demand}
@@ -22,7 +22,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query demandListQuery {
-        allDemandListYaml {
+        allListDemandsYaml {
           edges {
             node {
               listOfDemands {
