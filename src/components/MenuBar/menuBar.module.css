@@ -2,10 +2,17 @@
   background: #E9DFAC;
   border-radius: 0.25rem;
 }
+
+.hamburger {
+  background: #2F2D22;
+  border-radius: 50%;
+  width: 48px;
+  margin-top: 0.5rem;
+}
+
 .menuBarList {
   display: flex;
   justify-content: left;
-  padding-top: 1.25rem;
   margin-bottom: 0rem;
 }
 
@@ -37,6 +44,7 @@
 @media only screen and (min-width: 62rem) { 
   .menuBarList {
     flex-direction: row;
+    padding-top: 1.25rem;
   }
 } 
 
@@ -44,19 +52,22 @@
 @media only screen and (min-width: 48rem) {
   .menuBarList {
     flex-direction: row;
+    padding-top: 1.25rem;
   }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 37.5remx) {
+@media only screen and (min-width: 37.55rem) {
   .menuBarList {
-    flex-direction: column;
+    flex-direction: row;
+    padding-top: 1.25rem;
   }
 } 
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 37.5rem) {
+@media only screen and (max-width: 37.55rem) {
   .menuBarList {
     flex-direction: column;
+    padding-top: 0rem;
   }
 }
