@@ -8,8 +8,8 @@ const LinkList = data => {
 
   return (
     <div>
-      <h1>May Day Strike Links</h1>
-      <h4>This FAQ list is continually evolving and non-exhaustive. Updates will be added as more questions are brought to our attention. Thank you for standing in solidarity with us!</h4>
+      <h1>Related Links</h1>
+      <h4>Consider this a list of our official platforms and social accounts. If you're looking to get involved in any part of the movement, this is a fantastic place to start.</h4>
       <ul className={LinkListStyles.linkUnorderedList}>
         {data.allListLinksYaml.edges[0].node.listOfLinks.map((link) => (
           <li className={LinkListStyles.linkUnorderedListItem}>
