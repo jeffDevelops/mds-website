@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 
 import * as FAQListStyles from "./faqList.module.css"
 import FAQItem from "../FAQItem"
@@ -37,7 +37,6 @@ const FAQList = data => {
           </li>
         ))}
       </ol>
-      <Link to="/">Back to Homepage</Link>
     </div>
   )
 }

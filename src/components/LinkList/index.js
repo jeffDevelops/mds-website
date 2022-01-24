@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 
 import * as LinkListStyles from "./linkList.module.css"
 import LinkItem from "../LinkItem"
@@ -21,7 +21,6 @@ const LinkList = data => {
           </li>
         ))}
       </ul>
-      <Link to="/">Back to Homepage</Link>
     </div>
   )
 }
