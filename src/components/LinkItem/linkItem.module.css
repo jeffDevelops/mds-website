@@ -11,10 +11,9 @@ p {
   text-rendering: optimizeLegibility;
   line-height: 1.5;
   margin-bottom: 0em;
-  text-decoration: none;
 }
 
 hr {
   height: 0.15em;
-  background-color: #C73A26;
+  background-color: #2F2D22;
 }
