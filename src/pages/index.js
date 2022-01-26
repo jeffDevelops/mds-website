@@ -16,7 +16,6 @@ const IndexPage = () => (
     <DemandList />
     <p>Join us on Discord and social media to become part of the new era of labor organization in the United States and across the globe.</p>
     <p><Link to="/faq">Frequently Asked Questions</Link></p>
-    <p>More updates and information to come!</p>
   </Layout>
 )
 
