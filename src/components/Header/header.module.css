@@ -19,3 +19,7 @@ header {
   color: #e9dfac;
   text-decoration: none;
 }
+
+.siteTitleLink:hover {
+  color: #2F2D22;
+}
