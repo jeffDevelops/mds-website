@@ -1,4 +1,10 @@
 @import "../../css/typography.css";
+:root {
+  --theme-color: #c73a26;
+  --theme-hover: #9b2d1f;
+  --secondary-btn: #cecac4;
+  --secondary-hover: #b2afab;
+}
 
 html, body {
   height: 100%;
@@ -200,12 +206,41 @@ input {
 button,
 select {
   text-transform: none;
+  padding: 0.375rem 0.75rem;
+}
+input, button, select {
+  padding: 0.375rem 0.75rem;
+  border: solid 2px var(--secondary-hover);
+  border-radius: 2px;
+  min-height: 2rem;
 }
 [type="reset"],
 [type="submit"],
 button,
-html [type="button"] {
+html [type="button"].primary {
   -webkit-appearance: button;
+  border-radius: 2px;
+  border: solid 2px var(--theme-color);
+  background-color: var(--theme-color);
+  color: white;
+  font-weight: 600;
+  transition: 300ms;
+}
+[type="reset"]:hover,
+[type="submit"]:hover,
+button:hover,
+html [type="button"]:hover {
+  border-color: var(--theme-hover);
+  background-color: var(--theme-hover);
+}
+button.secondary, html [type="button"].secondary {
+  border: solid 2px var(--secondary-hover);
+  background-color: var(--secondary-btn);
+  color: black;
+  font-weight: 600;
+}
+button.secondary:hover, html [type="button"].secondary:hover {
+  background-color: var(--secondary-hover);
 }
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
