@@ -3,7 +3,7 @@ import React from "react"
 import * as FAQItemStyles from "./faqItem.module.css"
 
 export default (props) => (
-  <div>
+  <div className={FAQItemStyles.faqContainer}>
     { !props.hidden && 
       <div>
         <h3>{ props.question }</h3>

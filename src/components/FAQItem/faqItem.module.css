@@ -1,8 +1,8 @@
-body {
+.faqContainer body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-li {
+.faqContainer li {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;
@@ -10,7 +10,7 @@ li {
   margin-bottom: 1em;
 }
 
-p {
+.faqContainer p {
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-size: 1rem;

@@ -1,0 +1,23 @@
+.demandListContainer ol {
+  list-style: none;
+  counter-reset: item;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0;
+ }
+ .demandListContainer li {
+  counter-increment: item;
+  margin-bottom: 16px;
+ }
+
+.demandListContainer ol li:before {
+  margin-right: 16px;
+  content: counter(item);
+  border-radius: 100%;
+  width: 1.5rem;
+  text-align: center;
+  display: inline-block;
+  font-family: LietzLindauHamburg;
+  background-color: var(--theme-color);
+  color: var(--theme-bg-color);
+}

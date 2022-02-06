@@ -4,15 +4,13 @@ import { graphql, StaticQuery } from "gatsby"
 import * as DemandListStyles from "./demandList.module.css"
 
 const DemandList = data => (
-  <div>
+  <div className={DemandListStyles.demandListContainer}>
     <h2>Our Demands</h2>
     <ol>
       {data.allListDemandsYaml.edges[0].node.listOfDemands.map(item => (
-        <h3>
-          <li>
-            {item.demand}
-          </li>
-        </h3>
+        <li>
+          {item.demand}
+        </li>
       ))}
     </ol>
   </div>

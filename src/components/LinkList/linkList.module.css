@@ -1,5 +1,5 @@
 body {
-  background-color: #E9DFAC;
+  background-color: var(--theme-bg-color);
 }
 
 .linkUnorderedList {
