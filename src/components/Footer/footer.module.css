@@ -56,7 +56,7 @@ ul {
 
 @media only screen and (min-width: 29.8125rem /*477px*/) {
   .ftMain {
-      justify-content: space-around;
+    justify-content: space-between;
   }
   .ftColumnContent {
     padding-top: 3.5rem;
