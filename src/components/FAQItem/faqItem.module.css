@@ -11,6 +11,10 @@
   margin: auto auto 1rem 2rem;
 }
 
+.faqItemContainer h4 {
+  margin-bottom: 1rem;
+}
+
 .faqItemContainer li {
   text-rendering: optimizeLegibility;
   line-height: 1.5;

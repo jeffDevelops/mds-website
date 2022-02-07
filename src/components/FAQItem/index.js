@@ -47,7 +47,7 @@ export default (props) => (
           }
           { props.relatedLink1 &&
             <div className={FAQItemStyles.relatedLinks}>
-              <h3>Related Links:</h3>
+              <h4>Related Links:</h4>
               <ul>
                 <li className={FAQItemStyles.answerListLink}>
                   <a href={ props.relatedLink1 } target="_blank" rel="noopener noreferrer">{ props.relatedLink1Title }</a>
