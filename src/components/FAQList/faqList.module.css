@@ -1,3 +1,29 @@
-body {
-  background-color: var(--theme-bg-color);
+.faqListContainer {
+  margin-top: 3rem;
+}
+
+.faqListContainer ol {
+  margin-top: 3rem;
+  list-style: none;
+  counter-reset: item;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0;
+ }
+ .faqListContainer ol > li {
+  counter-increment: item;
+  margin-bottom: 16px;
+ }
+
+.faqListContainer ol > li:before {
+  position: absolute;
+  margin-right: 16px;
+  content: counter(item);
+  border-radius: 100%;
+  width: 1.5rem;
+  text-align: center;
+  display: inline-block;
+  font-family: LietzLindauHamburg;
+  background-color: var(--theme-color);
+  color: var(--theme-bg-color);
 }
