@@ -1,7 +1,9 @@
 @import "../../css/typography.css";
 :root {
   --theme-color: #c73a26;
-  --theme-hover: #9b2d1f;
+  --theme-hover: #9f2e1e;
+  --theme-bg-color: #e6dba9;
+  --theme-black: #2A2B2B;
   --secondary-btn: #cecac4;
   --secondary-hover: #b2afab;
 }
@@ -12,13 +14,13 @@ html, body {
 
 /* STICKY FOOTER */
 body {
-  background: #E9DFAC;
+  background: var(--theme-bg-color);
   display: flex;
-  /* min-height: 100vh; */
   flex-direction: column;
 }
 
 .content {
+  min-width: 360px;
   flex: 1 0 auto;
 }
 
@@ -30,7 +32,7 @@ body {
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  font: 112.5%/1.45em georgia, serif, sans-serif;
+  font: 112.5%/1.45em 'Open Sans', georgia, serif, sans-serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -38,8 +40,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  color: var(--theme-black);
+  font-family: 'Open Sans', georgia, sans-serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -54,10 +56,8 @@ details,
 figcaption,
 figure,
 footer,
-header,
 main,
 menu,
-nav,
 section,
 summary {
   display: block;
@@ -83,6 +83,8 @@ a {
   color: #c73a26;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  font-weight: bold;
+  transition: 300ms;
 }
 a:active,
 a:hover {
@@ -123,7 +125,7 @@ h1 {
 }
 mark {
   background-color: #ff0;
-  color: #000;
+  color: var(--theme-black);
 }
 small {
   font-size: 80%;
@@ -236,7 +238,7 @@ html [type="button"]:hover {
 button.secondary, html [type="button"].secondary {
   border: solid 2px var(--secondary-hover);
   background-color: var(--secondary-btn);
-  color: black;
+  color: var(--theme-black);
   font-weight: 600;
 }
 button.secondary:hover, html [type="button"].secondary:hover {
@@ -322,12 +324,13 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: LietzLindauHamburg, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
   line-height: 1.1;
+  text-transform: uppercase;
 }
 h3 {
   margin-left: 0;
@@ -339,7 +342,7 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -356,7 +359,7 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -373,7 +376,7 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -390,7 +393,7 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
@@ -415,7 +418,6 @@ ul {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   list-style-position: outside;
   list-style-image: none;
 }

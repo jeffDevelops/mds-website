@@ -93,6 +93,15 @@ module.exports = {
           exclude: ["/do-not-track/", "/do-not-track/me/too/"],
         },
       },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Open Sans`
+        ],
+        display: 'swap'
+      }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

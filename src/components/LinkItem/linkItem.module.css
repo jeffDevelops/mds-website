@@ -15,5 +15,5 @@ p {
 
 hr {
   height: 0.15em;
-  background-color: #2F2D22;
+  background-color: var(--theme-black);
 }

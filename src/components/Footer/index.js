@@ -10,15 +10,6 @@ const Footer = () => (
   <div className={FooterStyles.footer}>
     <section className={FooterStyles.ftMain}>
       <div className={FooterStyles.ftMainItem}>
-        <StaticImage
-          src="../../images/mayday-logo-circle.png"
-          width={300}
-          quality={95}
-          formats={["auto", "webp", "avif"]}
-          alt="May Day Strike Icon"
-        />
-      </div>
-      <div className={FooterStyles.ftMainItem}>
         <div className={FooterStyles.ftColumnContent}>
           <h2 className={FooterStyles.ftTitle}>Follow Us</h2>
           <ul>

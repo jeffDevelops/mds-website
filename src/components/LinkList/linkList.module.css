@@ -1,9 +1,10 @@
 body {
-  background-color: #E9DFAC;
+  background-color: var(--theme-bg-color);
 }
 
 .linkUnorderedList {
   list-style-type: none;
+  margin-top: 3rem;
 }
 
 .linkUnorderedListItem {

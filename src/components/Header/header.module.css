@@ -1,25 +1,27 @@
-header {
+.headerContainer {
   background: #C73A26;
   margin-bottom: 1.45rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 
-.headerText {
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-}
-
-.headerH1 {
-  margin-bottom: 0;
-}
 
 .siteTitleLink {
   margin: 0;
-  font-family: Alpenkreuzer;
-  color: #e9dfac;
+  font-family: LietzLindauHamburg;
+  color: var(--theme-bg-color);
   text-decoration: none;
 }
 
 .siteTitleLink:hover {
-  color: #2F2D22;
+  color: var(--theme-black);
+}
+
+/* Extra small devices (phones, 360px and down) */
+@media only screen and (max-width: 22.5rem) {
+  .headerContainer {
+    display: block;
+  }
 }
