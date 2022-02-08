@@ -8,7 +8,7 @@ import DemandList from "../components/DemandList"
 
 const IndexPage = () => (
   <Layout>
-    <Seo title="More Info Coming Soon" />
+    <Seo title="May Day Strike" />
     <div style={{ marginBottom: '3rem' }}>
       <h2>Who We Are</h2>
       <p>May Day Strike is a grassroots movement focused on establishing economic security, dignity, and fairness for workers of every nationality, race, and political affiliation.</p>
