@@ -1,0 +1,28 @@
+.formContainer {
+  max-width: 35rem;
+  margin: 0 auto;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.formField label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.formField select {
+  width: 100%;
+}
+
+.formContainer button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.formContainer .required {
+  color: red;
+}

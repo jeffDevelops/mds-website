@@ -655,6 +655,12 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+
+[data-icon~="times"]:hover {
+  color: black;
+  transition: 300ms;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
