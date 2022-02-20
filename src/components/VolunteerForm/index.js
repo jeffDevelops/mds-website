@@ -470,6 +470,137 @@ const VolunteerForm = () => {
           />
         </div>
 
+        <div className={FormStyles.twoColumnFlex}>
+          <div className={FormStyles.formField}>
+            <h5>
+              Which social platforms do you engage with on a regular basis?
+            </h5>
+            <p>Check all that apply!</p>
+            <Checkbox
+              value={SocialMediaPlatforms.Discord}
+              onChange={handleRegularlyEngagedSocialPlatformsChange}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Discord
+              )}
+            >
+              Discord
+            </Checkbox>
+            <Checkbox
+              value={SocialMediaPlatforms.Facebook}
+              onChange={handleRegularlyEngagedSocialPlatformsChange}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Facebook
+              )}
+            >
+              Facebook
+            </Checkbox>
+            <Checkbox
+              value={SocialMediaPlatforms.Instagram}
+              onChange={handleRegularlyEngagedSocialPlatformsChange}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Instagram
+              )}
+            >
+              Instagram
+            </Checkbox>
+            <Checkbox
+              value={SocialMediaPlatforms.Reddit}
+              onChange={handleRegularlyEngagedSocialPlatformsChange}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Reddit
+              )}
+            >
+              Reddit
+            </Checkbox>
+
+            {viewportWidth <= MOBILE_MAX_WIDTH &&
+              secondColumnSocialCheckboxes()}
+          </div>
+
+          {viewportWidth > MOBILE_MAX_WIDTH && (
+            <div className={FormStyles.formField}>
+              <h5 style={{ opacity: 0 }}>
+                Which social platforms do you engage with on a regular basis?
+              </h5>
+              <p style={{ opacity: 0 }}>Check all that apply!</p>
+              {secondColumnSocialCheckboxes()}
+            </div>
+          )}
+        </div>
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Discord && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Discord
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_discord-username">
+                <h5>
+                  Discord Username{" "}
+                  <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_discord-username"
+                value={discordUsername}
+                onChange={({ target: { value } }) => setDiscordUsername(value)}
+              />
+              {didAttemptSubmit && validationErrors.discordUsername && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.discordUsername}
+                </p>
+              )}
+            </div>
+          )}
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Reddit && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Reddit
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_reddit-username">
+                <h5>
+                  Reddit Username <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_reddit-username"
+                value={redditUsername}
+                onChange={({ target: { value } }) => setRedditUsername(value)}
+              />
+              {didAttemptSubmit && validationErrors.redditUsername && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.redditUsername}
+                </p>
+              )}
+            </div>
+          )}
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Twitter && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Twitter
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_twitter-handle">
+                <h5>
+                  Twitter Handle <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_twitter-handle"
+                value={twitterHandle}
+                onChange={({ target: { value } }) => setTwitterHandle(value)}
+              />
+              {didAttemptSubmit && validationErrors.twitterHandle && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.twitterHandle}
+                </p>
+              )}
+            </div>
+          )}
+
         <h2>Skills And Talents</h2>
         <p>
           Please indicate if you have work or volunteer experience, or hobby
@@ -743,137 +874,6 @@ const VolunteerForm = () => {
             />
           </div>
         </div>
-
-        <div className={FormStyles.twoColumnFlex}>
-          <div className={FormStyles.formField}>
-            <h5>
-              Which social platforms do you engage with on a regular basis?
-            </h5>
-            <p>Check all that apply!</p>
-            <Checkbox
-              value={SocialMediaPlatforms.Discord}
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes(
-                SocialMediaPlatforms.Discord
-              )}
-            >
-              Discord
-            </Checkbox>
-            <Checkbox
-              value={SocialMediaPlatforms.Facebook}
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes(
-                SocialMediaPlatforms.Facebook
-              )}
-            >
-              Facebook
-            </Checkbox>
-            <Checkbox
-              value={SocialMediaPlatforms.Instagram}
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes(
-                SocialMediaPlatforms.Instagram
-              )}
-            >
-              Instagram
-            </Checkbox>
-            <Checkbox
-              value={SocialMediaPlatforms.Reddit}
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes(
-                SocialMediaPlatforms.Reddit
-              )}
-            >
-              Reddit
-            </Checkbox>
-
-            {viewportWidth <= MOBILE_MAX_WIDTH &&
-              secondColumnSocialCheckboxes()}
-          </div>
-
-          {viewportWidth > MOBILE_MAX_WIDTH && (
-            <div className={FormStyles.formField}>
-              <h5 style={{ opacity: 0 }}>
-                Which social platforms do you engage with on a regular basis?
-              </h5>
-              <p style={{ opacity: 0 }}>Check all that apply!</p>
-              {secondColumnSocialCheckboxes()}
-            </div>
-          )}
-        </div>
-
-        {preferredSocialPlatform !== SocialMediaPlatforms.Discord && // Don't make the user answer more than once
-          regularlyEngagedSocialPlatforms.includes(
-            SocialMediaPlatforms.Discord
-          ) && (
-            <div className={FormStyles.formField}>
-              <label htmlFor="mauticform_TODO:_discord-username">
-                <h5>
-                  Discord Username{" "}
-                  <span className={FormStyles.required}>*</span>
-                </h5>
-              </label>
-              <input
-                type="text"
-                id="mauticform_TODO:_discord-username"
-                value={discordUsername}
-                onChange={({ target: { value } }) => setDiscordUsername(value)}
-              />
-              {didAttemptSubmit && validationErrors.discordUsername && (
-                <p className={FormStyles.validationError}>
-                  {validationErrors.discordUsername}
-                </p>
-              )}
-            </div>
-          )}
-
-        {preferredSocialPlatform !== SocialMediaPlatforms.Reddit && // Don't make the user answer more than once
-          regularlyEngagedSocialPlatforms.includes(
-            SocialMediaPlatforms.Reddit
-          ) && (
-            <div className={FormStyles.formField}>
-              <label htmlFor="mauticform_TODO:_reddit-username">
-                <h5>
-                  Reddit Username <span className={FormStyles.required}>*</span>
-                </h5>
-              </label>
-              <input
-                type="text"
-                id="mauticform_TODO:_reddit-username"
-                value={redditUsername}
-                onChange={({ target: { value } }) => setRedditUsername(value)}
-              />
-              {didAttemptSubmit && validationErrors.redditUsername && (
-                <p className={FormStyles.validationError}>
-                  {validationErrors.redditUsername}
-                </p>
-              )}
-            </div>
-          )}
-
-        {preferredSocialPlatform !== SocialMediaPlatforms.Twitter && // Don't make the user answer more than once
-          regularlyEngagedSocialPlatforms.includes(
-            SocialMediaPlatforms.Twitter
-          ) && (
-            <div className={FormStyles.formField}>
-              <label htmlFor="mauticform_TODO:_twitter-handle">
-                <h5>
-                  Twitter Handle <span className={FormStyles.required}>*</span>
-                </h5>
-              </label>
-              <input
-                type="text"
-                id="mauticform_TODO:_twitter-handle"
-                value={twitterHandle}
-                onChange={({ target: { value } }) => setTwitterHandle(value)}
-              />
-              {didAttemptSubmit && validationErrors.twitterHandle && (
-                <p className={FormStyles.validationError}>
-                  {validationErrors.twitterHandle}
-                </p>
-              )}
-            </div>
-          )}
 
         <div className={FormStyles.formField}>
           <h5>Additional Relevant Experience For Consideration</h5>
