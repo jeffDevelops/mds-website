@@ -1,0 +1,60 @@
+.form {
+  margin: 2rem 0;
+}
+
+.twoColumnFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 2rem auto 0;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.twoColumnFlex .formField .textInputLabel {
+  min-height: 80px; /* Ensure the vertical alignment of inputs is maintained with dynamic amounts of text */
+}
+
+.formField .textInputLabel h5,
+.formField h5 {
+  margin-bottom: 0.25rem;
+}
+
+.formField .textInputLabel p,
+.formField p {
+  font-size: 0.75rem;
+}
+
+.twoColumnFlex .formField {
+  width: calc(50% - 16px);
+}
+
+.formField .marginBottomHeading {
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .twoColumnFlex .formField .textInputLabel {
+    min-height: 98px; /** accommodate additional height for medium screens */
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .twoColumnFlex {
+    flex-direction: column;
+  }
+
+  .twoColumnFlex .formField .textInputLabel {
+    min-height: 0;
+  }
+
+  .twoColumnFlex .formField {
+    width: 100%;
+  }
+}

@@ -1,0 +1,32 @@
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.nativeCheckbox {
+  display: none;
+}
+
+.customCheckboxInput {
+  height: 22px;
+  width: 22px;
+  border-radius: 4px;
+  border: 2px solid var(--theme-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme-bg-color);
+  font-size: 14px;
+  transition: 300ms;
+}
+
+.checked {
+  color: var(--theme-color);
+}
+
+.checkboxContainer h5 {
+  margin-bottom: 0;
+}

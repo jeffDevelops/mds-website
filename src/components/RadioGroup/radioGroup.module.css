@@ -1,0 +1,49 @@
+.radioGroupContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding-left: 8px;
+}
+
+.radioContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radioContainer h6 {
+  margin-bottom: 0;
+}
+
+/** Hide the native radio button */
+.nativeRadioInput {
+  display: none;
+}
+
+/** Display a branded custom radio button instead */
+.customRadioInput {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--theme-bg-color), 0 0 0 4px var(--theme-color);
+  background: transparent;
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  background: var(--theme-color);
+}
+
+.disclosure {
+  font-size: 0.75rem;
+  padding-left: 32px;
+}
+
+.noDisclosureSpacer {
+  height: 16px;
+  width: 100%;
+}
