@@ -290,33 +290,6 @@ const VolunteerForm = () => {
     ]
   )
 
-  console.log({
-    preferredName,
-    nonWorkEmail,
-    preferredSocialPlatform,
-    socialPlatformUsername,
-    localRegion,
-    artDesignSignageExperience,
-    socialMediaEngagementExperience,
-    inPersonOrganizationExperience,
-    journalismWritingExperience,
-    laborOrUnionOrganizationExperience,
-    legalOrFinanceExperience,
-    nonProfitExperience,
-    transcriptionServicesExperience,
-    webDevelopmentExperience,
-    webDevelopmentExperienceText,
-    translationServicesExperience,
-    translationServicesExperienceText,
-    discordModeratorExperience,
-    redditModeratorExperience,
-    regularlyEngagedSocialPlatforms,
-    redditUsername,
-    discordUsername,
-    twitterHandle,
-    additionalRelevantExperience,
-  })
-
   return (
     <div id="mauticform_wrapper_TODO:">
       <h1>May Day Strike Volunteer Application</h1>
