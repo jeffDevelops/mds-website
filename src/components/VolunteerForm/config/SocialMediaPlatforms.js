@@ -20,7 +20,7 @@ export const SocialMediaPlatforms = {
   Instagram: "Instagram",
   Reddit: "Reddit",
   Snapchat: "Snapchat",
-  Tiktok: "Tiktok",
+  TikTok: "TikTok",
   Twitch: "Twitch",
   Twitter: "Twitter",
 }

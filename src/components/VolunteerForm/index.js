@@ -1,62 +1,39 @@
-import React, { useState, useCallback, useLayoutEffect } from "react"
+import React, { useState, useCallback, useMemo } from "react"
 import { DegreeOfExperience, Regions, SocialMediaPlatforms } from "./config"
 import * as FormStyles from "./form.module.css"
 import RadioGroup from "../RadioGroup"
 import Checkbox from "../Checkbox"
-import deepEqual from "lodash/isEqual"
-
-/**
- * RADIO GROUP RESPONSIVE LAYOUT
- *
- * A custom hook for calculating the number of columns to use for the radio button group
- */
-const useRadioButtonLayout = () => {
-  // Maintain state for the column and row configuration
-  const [regionRadioButtonColumns, setRegionRadioButtonColumns] = useState([
-    4, 4, 10,
-  ])
-
-  useLayoutEffect(() => {
-    // Configure the number of rows in each column, based on the viewport width
-    const handleResize = () => {
-      switch (true) {
-        case window.innerWidth <= 600:
-          if (!deepEqual(regionRadioButtonColumns, [Infinity]))
-            setRegionRadioButtonColumns([Infinity])
-          return
-        case window.innerWidth < 800 && window.innerWidth > 600:
-          if (!deepEqual(regionRadioButtonColumns, [6, Infinity]))
-            setRegionRadioButtonColumns([6, Infinity])
-          return
-        case window.innerWidth >= 800:
-          if (!deepEqual(regionRadioButtonColumns, [4, 4, Infinity]))
-            setRegionRadioButtonColumns([4, 4, Infinity])
-          return
-        default:
-          console.error("Unhandled viewport size")
-      }
-    }
-
-    // Run the column config on component mount
-    handleResize()
-
-    // Listen for resize events and clean up if unmounted
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [regionRadioButtonColumns])
-
-  return regionRadioButtonColumns
-}
+import {
+  MOBILE_MAX_WIDTH,
+  useRadioButtonLayout,
+} from "./hooks/useRadioButtonLayout"
+import { isEmail } from "validator"
 
 const VolunteerForm = () => {
   const [preferredName, setPreferredName] = useState("")
-  const [preferredSocialPlatform, setPreferredSocialPlatform] = useState(null)
+  const [preferredSocialPlatform, setPreferredSocialPlatform] = useState(
+    SocialMediaPlatforms.Discord
+  )
   const [socialPlatformUsername, setSocialPlatformUsername] = useState("")
   const [nonWorkEmail, setNonWorkEmail] = useState("")
   const [localRegion, setLocalRegion] = useState(Object.keys(Regions)[0])
   const [artDesignSignageExperience, setArtDesignSignageExperience] = useState(
+    DegreeOfExperience.NoRelevantExperienceOrNA
+  )
+  const [socialMediaEngagementExperience, setSocialMediaEngagementExperience] =
+    useState(DegreeOfExperience.NoRelevantExperienceOrNA)
+  const [inPersonOrganizationExperience, setInPersonOrganizationExperience] =
+    useState(DegreeOfExperience.NoRelevantExperienceOrNA)
+  const [journalismWritingExperience, setJournalismWritingExperience] =
+    useState(DegreeOfExperience.NoRelevantExperienceOrNA)
+  const [
+    laborOrUnionOrganizationExperience,
+    setLaborOrUnionOrganizationExperience,
+  ] = useState(DegreeOfExperience.NoRelevantExperienceOrNA)
+  const [legalOrFinanceExperience, setLegalOrFinanceExperience] = useState(
+    DegreeOfExperience.NoRelevantExperienceOrNA
+  )
+  const [nonProfitExperience, setNonProfitExperience] = useState(
     DegreeOfExperience.NoRelevantExperienceOrNA
   )
   const [transcriptionServicesExperience, setTranscriptionServicesExperience] =
@@ -83,15 +60,175 @@ const VolunteerForm = () => {
   const [regularlyEngagedSocialPlatforms, setRegularlyEngagedSocialPlatforms] =
     useState([])
 
+  const [redditUsername, setRedditUsername] = useState("")
+  const [discordUsername, setDiscordUsername] = useState("")
+  const [twitterHandle, setTwitterHandle] = useState("")
+
   const [additionalRelevantExperience, setAdditionalRelevantExperience] =
     useState("")
 
-  const dummySubmit = useCallback(() => {}, [preferredSocialPlatform])
+  const [didAttemptSubmit, setDidAttemptSubmit] = useState(false)
 
-  const regionRadioButtonColumns = useRadioButtonLayout()
+  const validationErrors = useMemo(() => {
+    const errors = {}
+
+    if (!preferredName) {
+      errors.preferredName = "Please enter your preferred name"
+    } else {
+      delete errors.preferredName
+    }
+
+    if (!nonWorkEmail) {
+      errors.nonWorkEmail =
+        "Please enter the best non-work email address to reach you"
+    } else if (!isEmail(nonWorkEmail)) {
+      errors.nonWorkEmail = "Please enter a valid email address"
+    } else {
+      delete errors.nonWorkEmail
+    }
+
+    if (!socialPlatformUsername) {
+      errors.socialPlatformUsername = `Please enter your ${preferredSocialPlatform} username`
+    } else {
+      delete errors.socialPlatformUsername
+    }
+
+    if (
+      webDevelopmentExperience !==
+        DegreeOfExperience.NoRelevantExperienceOrNA &&
+      !webDevelopmentExperienceText
+    ) {
+      errors.webDevelopmentExperienceText =
+        "Please enter your web development experience"
+    } else {
+      delete errors.webDevelopmentExperienceText
+    }
+
+    if (
+      translationServicesExperience !==
+        DegreeOfExperience.NoRelevantExperienceOrNA &&
+      !translationServicesExperienceText
+    ) {
+      errors.translationServicesExperienceText =
+        "Please enter your translation services experience"
+    } else {
+      delete errors.translationServicesExperienceText
+    }
+
+    if (
+      preferredSocialPlatform !== SocialMediaPlatforms.Discord &&
+      regularlyEngagedSocialPlatforms.includes(SocialMediaPlatforms.Discord) &&
+      !discordUsername
+    ) {
+      errors.discordUsername = "Please enter your Discord username"
+    } else {
+      delete errors.discordUsername
+    }
+
+    if (
+      preferredSocialPlatform !== SocialMediaPlatforms.Reddit &&
+      regularlyEngagedSocialPlatforms.includes(SocialMediaPlatforms.Reddit) &&
+      !redditUsername
+    ) {
+      errors.redditUsername = "Please enter your Reddit username"
+    } else {
+      delete errors.redditUsername
+    }
+
+    if (
+      preferredSocialPlatform !== SocialMediaPlatforms.Twitter &&
+      regularlyEngagedSocialPlatforms.includes(SocialMediaPlatforms.Twitter) &&
+      !twitterHandle
+    ) {
+      errors.twitterHandle = "Please enter your Twitter handle"
+    } else {
+      delete errors.twitterHandle
+    }
+
+    return errors
+  }, [
+    discordUsername,
+    nonWorkEmail,
+    preferredName,
+    preferredSocialPlatform,
+    redditUsername,
+    regularlyEngagedSocialPlatforms,
+    socialPlatformUsername,
+    translationServicesExperience,
+    translationServicesExperienceText,
+    twitterHandle,
+    webDevelopmentExperience,
+    webDevelopmentExperienceText,
+  ])
+
+  const errorsExist = useMemo(() => {
+    return Object.keys(validationErrors).length > 0
+  }, [validationErrors])
+
+  const dummySubmit = useCallback(
+    e => {
+      e.preventDefault()
+      setDidAttemptSubmit(true)
+
+      console.log({
+        preferredName,
+        nonWorkEmail,
+        preferredSocialPlatform,
+        socialPlatformUsername,
+        localRegion,
+        artDesignSignageExperience,
+        socialMediaEngagementExperience,
+        inPersonOrganizationExperience,
+        journalismWritingExperience,
+        laborOrUnionOrganizationExperience,
+        legalOrFinanceExperience,
+        nonProfitExperience,
+        transcriptionServicesExperience,
+        webDevelopmentExperience,
+        webDevelopmentExperienceText,
+        translationServicesExperience,
+        translationServicesExperienceText,
+        discordModeratorExperience,
+        redditModeratorExperience,
+        regularlyEngagedSocialPlatforms,
+        redditUsername,
+        discordUsername,
+        twitterHandle,
+        additionalRelevantExperience,
+      })
+    },
+    [
+      preferredName,
+      nonWorkEmail,
+      preferredSocialPlatform,
+      socialPlatformUsername,
+      localRegion,
+      artDesignSignageExperience,
+      socialMediaEngagementExperience,
+      inPersonOrganizationExperience,
+      journalismWritingExperience,
+      laborOrUnionOrganizationExperience,
+      legalOrFinanceExperience,
+      nonProfitExperience,
+      transcriptionServicesExperience,
+      webDevelopmentExperience,
+      webDevelopmentExperienceText,
+      translationServicesExperience,
+      translationServicesExperienceText,
+      discordModeratorExperience,
+      redditModeratorExperience,
+      regularlyEngagedSocialPlatforms,
+      redditUsername,
+      discordUsername,
+      twitterHandle,
+      additionalRelevantExperience,
+    ]
+  )
+
+  const { regionRadioButtonColumns, viewportWidth } = useRadioButtonLayout()
 
   const handleRegularlyEngagedSocialPlatformsChange = useCallback(
-    ({ target: { value, checked } }) => {
+    ({ target: { value } }) => {
       if (regularlyEngagedSocialPlatforms.includes(value)) {
         return setRegularlyEngagedSocialPlatforms(
           regularlyEngagedSocialPlatforms.filter(platform => platform !== value)
@@ -106,8 +243,82 @@ const VolunteerForm = () => {
     [regularlyEngagedSocialPlatforms]
   )
 
+  const secondColumnSocialCheckboxes = useCallback(
+    () => (
+      <>
+        <Checkbox
+          value={SocialMediaPlatforms.Snapchat}
+          onChange={handleRegularlyEngagedSocialPlatformsChange}
+          checked={regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Snapchat
+          )}
+        >
+          Snapchat
+        </Checkbox>
+        <Checkbox
+          value={SocialMediaPlatforms.TikTok}
+          onChange={handleRegularlyEngagedSocialPlatformsChange}
+          checked={regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.TikTok
+          )}
+        >
+          TikTok
+        </Checkbox>
+        <Checkbox
+          value={SocialMediaPlatforms.Twitch}
+          onChange={handleRegularlyEngagedSocialPlatformsChange}
+          checked={regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Twitch
+          )}
+        >
+          Twitch
+        </Checkbox>
+        <Checkbox
+          value={SocialMediaPlatforms.Twitter}
+          onChange={handleRegularlyEngagedSocialPlatformsChange}
+          checked={regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Twitter
+          )}
+        >
+          Twitter
+        </Checkbox>
+      </>
+    ),
+    [
+      handleRegularlyEngagedSocialPlatformsChange,
+      regularlyEngagedSocialPlatforms,
+    ]
+  )
+
+  console.log({
+    preferredName,
+    nonWorkEmail,
+    preferredSocialPlatform,
+    socialPlatformUsername,
+    localRegion,
+    artDesignSignageExperience,
+    socialMediaEngagementExperience,
+    inPersonOrganizationExperience,
+    journalismWritingExperience,
+    laborOrUnionOrganizationExperience,
+    legalOrFinanceExperience,
+    nonProfitExperience,
+    transcriptionServicesExperience,
+    webDevelopmentExperience,
+    webDevelopmentExperienceText,
+    translationServicesExperience,
+    translationServicesExperienceText,
+    discordModeratorExperience,
+    redditModeratorExperience,
+    regularlyEngagedSocialPlatforms,
+    redditUsername,
+    discordUsername,
+    twitterHandle,
+    additionalRelevantExperience,
+  })
+
   return (
-    <div id="mauticform_wrapper_TODO:" className={FormStyles.formContainer}>
+    <div id="mauticform_wrapper_TODO:">
       <h1>May Day Strike Volunteer Application</h1>
       <p>
         Please submit the following information to help us coordinate teams to
@@ -115,15 +326,83 @@ const VolunteerForm = () => {
       </p>
 
       <form
+        onSubmit={dummySubmit}
         className={FormStyles.form}
         autoComplete="false"
-        method="post"
-        action="TODO:"
+        // method="post"
+        // action="TODO:"
         id="mauticform_TODO:"
         data-mautic-form="TODO:"
         encType="multipart/form-data"
       >
         <h2>About You</h2>
+
+        <div className={FormStyles.twoColumnFlex}>
+          <div
+            id="mauticform_TODO:_non-work-email"
+            className={FormStyles.formField}
+          >
+            <label
+              className={FormStyles.textInputLabel}
+              htmlFor="volunteer-form_preferred-name"
+            >
+              <h5>
+                Preferred Name <span className={FormStyles.required}>*</span>
+              </h5>
+              <p>
+                Feel free to use a pseudonym or username if you'd like to remain
+                anonymous.
+              </p>
+            </label>
+
+            <input
+              id="volunteer-form_preferred-name"
+              onChange={({ target: { value } }) => setPreferredName(value)}
+              value={preferredName}
+              type="text"
+              autoComplete="off"
+            />
+
+            {didAttemptSubmit && validationErrors.preferredName && (
+              <p className={FormStyles.validationError}>
+                {validationErrors.preferredName}
+              </p>
+            )}
+          </div>
+
+          <div
+            id="mauticform_TODO:_non-work-email"
+            className={FormStyles.formField}
+          >
+            <label
+              className={FormStyles.textInputLabel}
+              htmlFor="volunteer-form_non-work-email"
+            >
+              <h5>
+                Best non-work email{" "}
+                <span className={FormStyles.required}>*</span>
+              </h5>
+
+              <p>
+                Please double check the spelling to ensure we can contact you,
+                and make sure not to use your work email!
+              </p>
+            </label>
+
+            <input
+              id="volunteer-form_non-work-email"
+              onChange={({ target: { value } }) => setNonWorkEmail(value)}
+              type="text"
+              autoComplete="off"
+            />
+
+            {didAttemptSubmit && validationErrors.nonWorkEmail && (
+              <p className={FormStyles.validationError}>
+                {validationErrors.nonWorkEmail}
+              </p>
+            )}
+          </div>
+        </div>
 
         <div className={FormStyles.twoColumnFlex}>
           <div
@@ -134,7 +413,10 @@ const VolunteerForm = () => {
               className={FormStyles.textInputLabel}
               htmlFor="volunteer-form_preferred-social-platform"
             >
-              <h5>Preferred Social Platform</h5>
+              <h5>
+                Preferred Social Platform{" "}
+                <span className={FormStyles.required}>*</span>
+              </h5>
               <p>
                 To help us get in contact, please let us know where you'd like
                 us to reach you!
@@ -156,52 +438,37 @@ const VolunteerForm = () => {
           </div>
 
           <div
-            id="mauticform_TODO:_preferred_social_platform"
+            id="mauticform_TODO:_preferred_social_platform_username"
             className={FormStyles.formField}
           >
             <label
               className={FormStyles.textInputLabel}
-              htmlFor="volunteer-form_social-platform-username"
+              htmlFor="volunteer-form_preferred-social-platform-username"
             >
-              <h5>Username for the platform you specified</h5>
+              <h5>
+                Username for the platform you specified{" "}
+                <span className={FormStyles.required}>*</span>
+              </h5>
               <p>
                 Please double check the spelling to ensure we can contact you!
               </p>
             </label>
 
             <input
-              id="volunteer-form_social-platform-username"
+              id="volunteer-form_preferred-social-platform-username"
               onChange={({ target: { value } }) =>
                 setSocialPlatformUsername(value)
               }
               type="text"
               autoComplete="off"
             />
+
+            {didAttemptSubmit && validationErrors.socialPlatformUsername && (
+              <p className={FormStyles.validationError}>
+                {validationErrors.socialPlatformUsername}
+              </p>
+            )}
           </div>
-        </div>
-
-        <div
-          id="mauticform_TODO:_non-work-email"
-          className={FormStyles.formField}
-        >
-          <label
-            className={FormStyles.textInputLabel}
-            htmlFor="volunteer-form_non-work-email"
-          >
-            <h5>Best non-work email</h5>
-
-            <p>
-              Please double check the spelling to ensure we can contact you, and
-              make sure not to use your work email!
-            </p>
-          </label>
-
-          <input
-            id="volunteer-form_social-platform-username"
-            onChange={({ target: { value } }) => setNonWorkEmail(value)}
-            type="text"
-            autoComplete="off"
-          />
         </div>
 
         <div className={FormStyles.formField}>
@@ -260,10 +527,10 @@ const VolunteerForm = () => {
             </h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setSocialMediaEngagementExperience(value)}
+              value={socialMediaEngagementExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_social-media-engagement-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -279,10 +546,10 @@ const VolunteerForm = () => {
             </h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setInPersonOrganizationExperience(value)}
+              value={inPersonOrganizationExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_in-person-organization-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -296,10 +563,10 @@ const VolunteerForm = () => {
             </h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setJournalismWritingExperience(value)}
+              value={journalismWritingExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_journalism-or-writing-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -315,10 +582,10 @@ const VolunteerForm = () => {
             </h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setLaborOrUnionOrganizationExperience(value)}
+              value={laborOrUnionOrganizationExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_labor-or-union-organization-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -330,10 +597,10 @@ const VolunteerForm = () => {
             <h5 className={FormStyles.marginBottomHeading}>Legal / Finance</h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setLegalOrFinanceExperience(value)}
+              value={legalOrFinanceExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_legal-finance-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -347,10 +614,10 @@ const VolunteerForm = () => {
             <h5 className={FormStyles.marginBottomHeading}>Non-Profit</h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setNonProfitExperience(value)}
+              value={nonProfitExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
-                id: `volunteer-form_art-design-signage-${key}`,
+                id: `volunteer-form_non-profit-${key}`,
                 key: key,
                 label: DegreeOfExperience[key],
                 value: DegreeOfExperience[key],
@@ -392,10 +659,14 @@ const VolunteerForm = () => {
               }))}
             />
           </div>
+
           {webDevelopmentExperience !==
             DegreeOfExperience.NoRelevantExperienceOrNA && (
             <div className={FormStyles.formField}>
-              <h5>Web Development Experience Type</h5>
+              <h5>
+                Web Development Experience Type{" "}
+                <span className={FormStyles.required}>*</span>
+              </h5>
               <p>
                 Please indicate which types of experience you have
                 (Front-end/Back-end/Programmer/etc)
@@ -403,9 +674,19 @@ const VolunteerForm = () => {
 
               <input
                 value={webDevelopmentExperienceText}
+                onChange={({ target: { value } }) =>
+                  setWebDevelopmentExperienceText(value)
+                }
                 type="text"
-                autocomplete="off"
+                autoComplete="off"
               />
+
+              {didAttemptSubmit &&
+                validationErrors.webDevelopmentExperienceText && (
+                  <p className={FormStyles.validationError}>
+                    {validationErrors.webDevelopmentExperienceText}
+                  </p>
+                )}
             </div>
           )}
         </div>
@@ -432,14 +713,26 @@ const VolunteerForm = () => {
           {translationServicesExperience !==
             DegreeOfExperience.NoRelevantExperienceOrNA && (
             <div className={FormStyles.formField}>
-              <h5>Language(s)</h5>
+              <h5>
+                Language(s)<span className={FormStyles.required}>*</span>
+              </h5>
               <p>Please list language(s) you can translate</p>
 
               <input
                 value={translationServicesExperienceText}
+                onChange={({ target: { value } }) =>
+                  setTranslationServicesExperienceText(value)
+                }
                 type="text"
-                autocomplete="off"
+                autoComplete="off"
               />
+
+              {didAttemptSubmit &&
+                validationErrors.translationServicesExperienceText && (
+                  <p className={FormStyles.validationError}>
+                    {validationErrors.translationServicesExperienceText}
+                  </p>
+                )}
             </div>
           )}
         </div>
@@ -451,8 +744,8 @@ const VolunteerForm = () => {
             </h5>
 
             <RadioGroup
-              onChange={value => setArtDesignSignageExperience(value)}
-              value={artDesignSignageExperience}
+              onChange={value => setDiscordModeratorExperience(value)}
+              value={discordModeratorExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
                 id: `volunteer-form_discord-moderator-${key}`,
                 key: key,
@@ -466,8 +759,8 @@ const VolunteerForm = () => {
             <h5 className={FormStyles.marginBottomHeading}>Reddit Moderator</h5>
 
             <RadioGroup
-              onChange={value => setTranscriptionServicesExperience(value)}
-              value={transcriptionServicesExperience}
+              onChange={value => setRedditModeratorExperience(value)}
+              value={redditModeratorExperience}
               options={Object.keys(DegreeOfExperience).map(key => ({
                 id: `volunteer-form_reddit-moderator-${key}`,
                 key: key,
@@ -485,70 +778,129 @@ const VolunteerForm = () => {
             </h5>
             <p>Check all that apply!</p>
             <Checkbox
-              value="Discord"
+              value={SocialMediaPlatforms.Discord}
               onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Discord")}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Discord
+              )}
             >
               Discord
             </Checkbox>
             <Checkbox
-              value="Facebook"
+              value={SocialMediaPlatforms.Facebook}
               onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Facebook")}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Facebook
+              )}
             >
               Facebook
             </Checkbox>
             <Checkbox
-              value="Instagram"
+              value={SocialMediaPlatforms.Instagram}
               onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Instagram")}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Instagram
+              )}
             >
               Instagram
             </Checkbox>
             <Checkbox
-              value="Reddit"
+              value={SocialMediaPlatforms.Reddit}
               onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Reddit")}
+              checked={regularlyEngagedSocialPlatforms.includes(
+                SocialMediaPlatforms.Reddit
+              )}
             >
               Reddit
             </Checkbox>
+
+            {viewportWidth <= MOBILE_MAX_WIDTH &&
+              secondColumnSocialCheckboxes()}
           </div>
 
-          <div className={FormStyles.formField}>
-            <h5 style={{ opacity: 0 }}>
-              Which social platforms do you engage with on a regular basis?
-            </h5>
-            <p style={{ opacity: 0 }}>Check all that apply!</p>
-            <Checkbox
-              value="Snapchat"
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Snapchat")}
-            >
-              Snapchat
-            </Checkbox>
-            <Checkbox
-              value="TikTok"
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("TikTok")}
-            >
-              TikTok
-            </Checkbox>
-            <Checkbox
-              value="Twitch"
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Twitch")}
-            >
-              Twitch
-            </Checkbox>
-            <Checkbox
-              value="Twitter"
-              onChange={handleRegularlyEngagedSocialPlatformsChange}
-              checked={regularlyEngagedSocialPlatforms.includes("Twitter")}
-            >
-              Twitter
-            </Checkbox>
-          </div>
+          {viewportWidth > MOBILE_MAX_WIDTH && (
+            <div className={FormStyles.formField}>
+              <h5 style={{ opacity: 0 }}>
+                Which social platforms do you engage with on a regular basis?
+              </h5>
+              <p style={{ opacity: 0 }}>Check all that apply!</p>
+              {secondColumnSocialCheckboxes()}
+            </div>
+          )}
         </div>
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Discord && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Discord
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_discord-username">
+                <h5>
+                  Discord Username{" "}
+                  <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_discord-username"
+                value={discordUsername}
+                onChange={({ target: { value } }) => setDiscordUsername(value)}
+              />
+              {didAttemptSubmit && validationErrors.discordUsername && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.discordUsername}
+                </p>
+              )}
+            </div>
+          )}
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Reddit && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Reddit
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_reddit-username">
+                <h5>
+                  Reddit Username <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_reddit-username"
+                value={redditUsername}
+                onChange={({ target: { value } }) => setRedditUsername(value)}
+              />
+              {didAttemptSubmit && validationErrors.redditUsername && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.redditUsername}
+                </p>
+              )}
+            </div>
+          )}
+
+        {preferredSocialPlatform !== SocialMediaPlatforms.Twitter && // Don't make the user answer more than once
+          regularlyEngagedSocialPlatforms.includes(
+            SocialMediaPlatforms.Twitter
+          ) && (
+            <div className={FormStyles.formField}>
+              <label htmlFor="mauticform_TODO:_twitter-handle">
+                <h5>
+                  Twitter Handle <span className={FormStyles.required}>*</span>
+                </h5>
+              </label>
+              <input
+                type="text"
+                id="mauticform_TODO:_twitter-handle"
+                value={twitterHandle}
+                onChange={({ target: { value } }) => setTwitterHandle(value)}
+              />
+              {didAttemptSubmit && validationErrors.twitterHandle && (
+                <p className={FormStyles.validationError}>
+                  {validationErrors.twitterHandle}
+                </p>
+              )}
+            </div>
+          )}
 
         <div className={FormStyles.formField}>
           <h5>Additional Relevant Experience For Consideration</h5>
@@ -566,6 +918,16 @@ const VolunteerForm = () => {
 
         <div id="mauticform_TODO:_error"></div>
         <div id="mauticform_TODO:_message"></div>
+
+        {didAttemptSubmit && errorsExist && (
+          <p className={FormStyles.validationError}>
+            Errors exist in the form above. Check your answers and try again.
+          </p>
+        )}
+
+        <button disabled={didAttemptSubmit && errorsExist} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   )

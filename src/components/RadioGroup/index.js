@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, Fragment } from "react"
+import React, { useCallback, useMemo, Fragment } from "react"
 import PropTypes from "prop-types"
 import * as RadioStyles from "./radioGroup.module.css"
 
@@ -10,7 +10,7 @@ export const RadioGroup = ({
 }) => {
   const handleChange = useCallback(
     ({ target: { value } }) => onChange(value),
-    []
+    [onChange]
   )
 
   const columns = useMemo(() => {
@@ -30,13 +30,12 @@ export const RadioGroup = ({
     }, [])
 
     return columns
-  }, [columnDefs])
+  }, [columnDefs, options])
 
   return (
     <main className={RadioStyles.radioGroupContainer}>
       {columns.map((rows, index) => (
         <section
-          className={RadioStyles.radioGroupColumn}
           key={index}
           style={{ width: `calc(100% / ${columns.length})` }}
         >
