@@ -2,6 +2,18 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
+  flex-direction: row-reverse;
+}
+
+.hamburger {
+  border-radius: 50%;
+  width: 48px;
+  margin-top: 0.5rem;
+  transition: 300ms;
+}
+.hamburger-react:hover {
+  background: #2F2D22;
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.4);
 }
 
 .buttonBackground {
@@ -35,22 +47,15 @@
   color: var(--theme-black);
 }
 
-/* Small devices (phones, 420px and down) */
-@media only screen and (max-width: 26.25rem) {
+/* Mid-small devices (phones, 670px and down) */
+@media only screen and (max-width: 670px) {
+  .menuBarContainer {
+    margin: auto 1rem auto auto;
+    align-items: flex-start;
+  }
+  .menuBarList:not(:last-child) {display: none;}
   .menuBarList {
-    gap: 0;
-  }
-  .menuBarList li {
-    border-right: solid 2px var(--theme-bg-color);
-  }
-  .menuBarList li:last-child {
-    border: none;
-  }
-}
-
-/* Extra small devices (phones, 360px and down) */
-@media only screen and (max-width: 22.5rem) {
-  .menuBarList {
-    padding-left: 1.0875rem;
+    flex-direction: column;
+     padding-left: 1.0875rem;
   }
 }
