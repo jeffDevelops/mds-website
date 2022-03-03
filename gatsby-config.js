@@ -9,7 +9,7 @@ module.exports = {
       github: "MayDayStrike",
       instagram: "MayDayStrike",
       twitter: "MayDayStrike22",
-    }
+    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -65,17 +65,18 @@ module.exports = {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
-          include: /\.inline\.svg$/
-        }
-      }
+          include: /\.inline\.svg$/,
+        },
+      },
     },
-    `gatsby-transformer-yaml`,{
+    `gatsby-transformer-yaml`,
+    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
           process.env.GOOGLE_ANALYTICS_ID,
-          process.env.GOOGLE_ANALYTICS_UNIVERSAL_ID // Google Analytics / GA
+          process.env.GOOGLE_ANALYTICS_UNIVERSAL_ID, // Google Analytics / GA
         ],
         // This object gets passed directly to the gtag config command
         // This config will be shared across all trackingIds
@@ -97,12 +98,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Open Sans`
-        ],
-        display: 'swap'
-      }
-    }
+        fonts: [`Open Sans`],
+        display: "swap",
+      },
+    },
+    "gatsby-plugin-netlify", // manually adds Netlify plugin as workaround for current broken published version (2.1.1): https://github.com/netlify/netlify-plugin-gatsby/issues/310
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
