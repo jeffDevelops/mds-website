@@ -9,6 +9,7 @@ import {
 } from "./hooks/useRadioButtonLayout"
 import { useFormState } from "./hooks/useFormState"
 import { useReCaptcha } from "../../hooks/useReCaptcha"
+import Fist from "./Fist.inline.svg"
 
 const VolunteerForm = () => {
   // Custom Hooks
@@ -73,6 +74,8 @@ const VolunteerForm = () => {
     setLoading,
     success,
     setSuccess,
+    shouldRemoveForm,
+    setShouldRemoveForm,
   } = useFormState()
 
   const handleSubmit = useCallback(
@@ -91,7 +94,19 @@ const VolunteerForm = () => {
 
       await submitForm()
       setLoading(false)
-      setSuccess(true)
+
+      // Add the transition class to fade the form out of view
+      setShouldRemoveForm(true)
+
+      // Scroll the user to the top of the page for the success state animation
+      window.scroll({
+        behavior: "smooth",
+        top: 0,
+      })
+
+      setTimeout(() => {
+        setSuccess(true)
+      }, 1000)
     },
     [
       setDidAttemptSubmit,
@@ -166,8 +181,21 @@ const VolunteerForm = () => {
     ]
   )
 
+  if (success) {
+    return (
+      <div className={FormStyles.formSuccess}>
+        <h2>Thank you for your solidarity!</h2>
+        <p>We'll be in touch soon.</p>
+
+        <div className={FormStyles.illustrationContainer}>
+          <Fist />
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <>
+    <div class={shouldRemoveForm ? FormStyles.removeFormTransition : ""}>
       <h1>May Day Strike Volunteer Application</h1>
       <p>
         Please submit the following information to help us coordinate teams to
@@ -773,11 +801,14 @@ const VolunteerForm = () => {
           data-sitekey={process.env.GATSBY_RECAPTCHA_SITE_KEY}
         />
 
-        <button disabled={didAttemptSubmit && errorsExist} type="submit">
-          Submit
+        <button
+          disabled={(didAttemptSubmit && errorsExist) || loading}
+          type="submit"
+        >
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
-    </>
+    </div>
   )
 }
 

@@ -4,6 +4,8 @@ export const useReCaptcha = () => {
   useEffect(() => {
     // Register callback for when reCAPTCHA is loaded and ready to render the widget
     window.reCaptchaOnloadCallback = () => {
+      if (!document.getElementById("g-recaptcha")) return
+
       window.grecaptcha.render("g-recaptcha", {
         sitekey: process.env.GATSBY_RECAPTCHA_SITE_KEY,
       })

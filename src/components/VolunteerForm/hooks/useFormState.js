@@ -84,6 +84,7 @@ export const useFormState = () => {
   const [loading, setLoading] = useState(false)
 
   const [success, setSuccess] = useState(false)
+  const [shouldRemoveForm, setShouldRemoveForm] = useState(false)
 
   const validationErrors = useMemo(() => {
     const errors = {}
@@ -216,13 +217,7 @@ export const useFormState = () => {
       }),
     })
 
-    const data = await response.json()
-
-    setLoading(false)
-
-    if (data.success) {
-      setSuccess(true)
-    }
+    await response.json()
   }, [
     preferredName,
     preferredSocialPlatform,
@@ -254,6 +249,14 @@ export const useFormState = () => {
     validationErrors,
     errorsExist,
     submitForm,
+    didAttemptSubmit,
+    setDidAttemptSubmit,
+    loading,
+    setLoading,
+    success,
+    setSuccess,
+    shouldRemoveForm,
+    setShouldRemoveForm,
 
     preferredName,
     setPreferredName,
@@ -303,11 +306,5 @@ export const useFormState = () => {
     setTwitterHandle,
     additionalRelevantExperience,
     setAdditionalRelevantExperience,
-    didAttemptSubmit,
-    setDidAttemptSubmit,
-    loading,
-    setLoading,
-    success,
-    setSuccess,
   }
 }

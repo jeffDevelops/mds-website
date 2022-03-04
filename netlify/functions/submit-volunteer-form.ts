@@ -4,7 +4,7 @@ import { GoogleSpreadsheet } from "google-spreadsheet"
 
 const NA = "No Relevant Experience/Not Applicable"
 
-export const handler: Handler = async ({ body: raw }, context) => {
+export const handler: Handler = async ({ body: raw }) => {
   if (!process.env.GCP_CLIENT_EMAIL) {
     return {
       statusCode: 500,

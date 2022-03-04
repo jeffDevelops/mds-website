@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  margin: 0; 
+  margin: 0;
   padding: 0;
 }
 
@@ -15,10 +15,12 @@ ul {
 }
 
 .footer {
-  background-color: #C73A26;
+  background-color: #c73a26;
   font-family: ’Lato’, sans-serif;
   color: #bbb;
   line-height: 1.5;
+  position: relative;
+  z-index: 1;
 }
 
 .socialsListItemLink {
@@ -62,9 +64,9 @@ ul {
     padding-top: 3.5rem;
   }
 }
-@media only screen and (min-width: 77.5rem /*1240px*/ ) {
+@media only screen and (min-width: 77.5rem /*1240px*/) {
   .ftMain {
-      justify-content: space-evenly;
+    justify-content: space-evenly;
   }
   .ftColumnContent {
     padding-top: 3.5rem;
