@@ -8,9 +8,7 @@ const DemandList = data => (
     <h2>Our Demands</h2>
     <ol>
       {data.allListDemandsYaml.edges[0].node.listOfDemands.map(item => (
-        <li>
-          {item.demand}
-        </li>
+        <li key={item.demand}>{item.demand}</li>
       ))}
     </ol>
   </div>
