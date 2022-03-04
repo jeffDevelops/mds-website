@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useCallback, useLayoutEffect } from "react"
 import { DegreeOfExperience, Regions, SocialMediaPlatforms } from "../config"
 import { isEmail } from "validator"
 
@@ -244,6 +244,14 @@ export const useFormState = () => {
     twitterHandle,
     additionalRelevantExperience,
   ])
+
+  // On mount, and before rendering, ensure the form hasn't already been submitted in this browser
+  useLayoutEffect(() => {
+    const didAlreadySubmit = localStorage.getItem("didSubmitVolunteerForm")
+    if (Boolean(didAlreadySubmit)) {
+      setSuccess(true)
+    }
+  }, [setSuccess])
 
   return {
     validationErrors,

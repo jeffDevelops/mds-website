@@ -95,6 +95,9 @@ const VolunteerForm = () => {
       await submitForm()
       setLoading(false)
 
+      // Prevent the form from being submitted again
+      localStorage.setItem("didSubmitVolunteerForm", "true")
+
       // Add the transition class to fade the form out of view
       setShouldRemoveForm(true)
 
@@ -104,6 +107,7 @@ const VolunteerForm = () => {
         top: 0,
       })
 
+      // Wait for the smooth scroll to finish before bringing the success state in
       setTimeout(() => {
         setSuccess(true)
       }, 1000)
@@ -114,6 +118,7 @@ const VolunteerForm = () => {
       setSuccess,
       submitForm,
       verifyReCaptchaResponse,
+      setShouldRemoveForm,
     ]
   )
 
@@ -195,7 +200,7 @@ const VolunteerForm = () => {
   }
 
   return (
-    <div class={shouldRemoveForm ? FormStyles.removeFormTransition : ""}>
+    <div className={shouldRemoveForm ? FormStyles.removeFormTransition : ""}>
       <h1>May Day Strike Volunteer Application</h1>
       <p>
         Please submit the following information to help us coordinate teams to
